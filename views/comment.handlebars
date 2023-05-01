@@ -1,0 +1,14 @@
+<div>
+    {{>post plainPostData}}
+
+    <form>
+        <div>
+            <textarea id="commentBody" rows="2" placeholder="Add a comment"></textarea>
+        </div>
+        <button type="submit" id="commentSubmit">Submit</button>
+    </form>
+
+    {{#each plainCommentData as |comment|}}
+    {{>response}}
+    {{/each}}
+</div>

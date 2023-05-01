@@ -52,3 +52,32 @@ async function logOut(e){
     else alert('Logout failed somehow.')
 }
 if (document.getElementById("logOutButton")) document.getElementById("logOutButton").addEventListener("click", logOut)
+
+async function newPost(e){
+    e.preventDefault()
+    const title = document.getElementById('postTitle').value.trim()
+    const body = document.getElementById('postBody').value.trim()
+    const response = await fetch ('api/post/newpost', {
+        method: 'POST',
+        body: JSON.stringify({title,body}),
+        headers: {'Content-Type': 'application/json'}
+    })
+    if(response.ok) document.location.replace('/')
+    else alert('Failed to post')
+}
+
+if (document.getElementById('postSubmit')) document.getElementById('postSubmit').addEventListener('click', newPost)
+
+async function newComment(e){
+    e.preventDefault()
+    const body = document.getElementById('commentBody').value.trim()
+    const postId = window.location.href.split('/').replace('?','')
+    const response = await fetch('/api/post/newcomment', {
+        method: 'POST',
+        body: JSON.stringify({body,postId}),
+        header: {'Content-Type': 'application/json'}
+    })
+    if (response.ok) document.location.reload()
+    else alert('Comment not posted!')
+}
+if (document.getElementById('commentSubmit'))document.getElementById('commentSubmit').addEventListener("click",newComment);
