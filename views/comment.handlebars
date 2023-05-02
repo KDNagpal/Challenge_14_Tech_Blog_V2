@@ -5,10 +5,10 @@
         <div>
             <textarea id="commentBody" rows="2" placeholder="Add a comment"></textarea>
         </div>
-        <button type="submit" id="commentSubmit">Submit</button>
+        <button type="submit" id="submitComment">Submit</button>
     </form>
 
-    {{#each plainCommentData as |comment|}}
-    {{>response}}
-    {{/each}}
+     {{#each plainCommentData}}
+            {{> response comment=this}}
+        {{/each}}
 </div>
